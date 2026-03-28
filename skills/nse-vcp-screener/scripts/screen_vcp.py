@@ -43,7 +43,7 @@ def get_universe(universe: str, custom_tickers: str | None = None) -> list[str]:
         elif universe == "nifty200":
             return ns.get_nifty200_with_ns()
         elif universe == "nifty500":
-            return ns.get_nifty_total_market_with_ns()
+            return ns.get_nifty500_with_ns()
         else:
             return ns.get_nifty50_with_ns()
     except ImportError:
