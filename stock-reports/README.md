@@ -24,4 +24,4 @@ The `/stock-report <stock name>` command runs three agents in sequence:
 
 | Stock | Date | Report | Raw | Sources |
 |-------|------|--------|-----|---------|
-| *(new entries will be added here by the Report Writer agent)* | | | | |
+| TeamLease Services Ltd | 2026-03-29 | [Report](teamlease-services-ltd/2026-03-29/teamlease-services-ltd-2026-03-29.md) | [Raw](teamlease-services-ltd/2026-03-29/teamlease-services-ltd-2026-03-29.raw.md) | [Sources](teamlease-services-ltd/2026-03-29/teamlease-services-ltd-2026-03-29.sources.md) |
