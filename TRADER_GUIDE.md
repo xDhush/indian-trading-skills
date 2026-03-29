@@ -1,4 +1,4 @@
-# Indian Trading Skills — Comprehensive Usage Guide
+# Indian Trading Skills — Comprehensive Trader Guide
 
 > **Disclaimer**: This guide is for educational purposes only. Trading in securities involves substantial risk of loss. Nothing here constitutes financial advice. Read SEBI's investor charter before trading.
 
@@ -7,19 +7,22 @@
 ## Table of Contents
 
 1. [How to Load a Skill](#how-to-load-a-skill)
-2. [Skill 1: Technical Analyst](#1-technical-analyst)
-3. [Skill 2: NSE VCP Screener](#2-nse-vcp-screener)
-4. [Skill 3: India Stock Analysis](#3-india-stock-analysis)
-5. [Skill 4: Scenario Analyzer](#4-scenario-analyzer)
-6. [Skill 5: FII/DII Flow Tracker](#5-fiidii-flow-tracker)
-7. [Skill 6: Options Strategy Advisor](#6-options-strategy-advisor)
-8. [Skill 7: Backtest Expert](#7-backtest-expert)
-9. [Skill 8: India Market Breadth](#8-india-market-breadth)
-10. [Skill 9: India News Tracker](#9-india-news-tracker)
-11. [Skill 10: Weekly F&O Trade Planner](#10-weekly-fo-trade-planner)
-12. [Using Skills Together: Power Workflows](#using-skills-together-power-workflows)
-13. [Common Mistakes Across All Skills](#common-mistakes-across-all-skills)
-14. [Setup Checklist](#setup-checklist)
+2. [Slash Command: /stock-report](#slash-command-stock-report)
+3. [Skill: India Stock Analysis — Interactive](#india-stock-analysis--interactive)
+4. [Skill: Stock Report Writer](#stock-report-writer)
+5. [Skill 1: Technical Analyst](#1-technical-analyst)
+6. [Skill 2: NSE VCP Screener](#2-nse-vcp-screener)
+7. [Skill 3: India Stock Analysis](#3-india-stock-analysis)
+8. [Skill 4: Scenario Analyzer](#4-scenario-analyzer)
+9. [Skill 5: FII/DII Flow Tracker](#5-fiidii-flow-tracker)
+10. [Skill 6: Options Strategy Advisor](#6-options-strategy-advisor)
+11. [Skill 7: Backtest Expert](#7-backtest-expert)
+12. [Skill 8: India Market Breadth](#8-india-market-breadth)
+13. [Skill 9: India News Tracker](#9-india-news-tracker)
+14. [Skill 10: Weekly F&O Trade Planner](#10-weekly-fo-trade-planner)
+15. [Using Skills Together: Power Workflows](#using-skills-together-power-workflows)
+16. [Common Mistakes Across All Skills](#common-mistakes-across-all-skills)
+17. [Setup Checklist](#setup-checklist)
 
 ---
 
@@ -43,6 +46,179 @@ Upload SKILL.md as a project document in Claude.ai/projects for persistent acces
 - Zerodha Kite MCP or Groww MCP unlocks live prices, OI data, and order placement
 - Without MCP: skills fall back to yfinance + web search (still functional)
 - With MCP: real-time data, live order placement, options chain data
+
+---
+
+## Slash Command: /stock-report
+
+**File**: `.claude/commands/stock-report.md`
+**Category**: End-to-End Stock Research | **Input**: Stock name (e.g., "HDFC Bank")
+**Best for**: Generating a complete, simplified investment report with source transparency
+
+### What It Does
+
+A single slash command that orchestrates three agents in sequence to produce a comprehensive stock investment report. You type `/stock-report HDFC Bank` and get back a fully formatted, jargon-explained markdown report — with every web source vetted by you before analysis begins.
+
+The pipeline:
+1. **Source Scout** → gathers market data + web sources, presents them for your approval
+2. **Stock Analyst** → performs deep fundamental + technical analysis using only approved sources
+3. **Report Writer** → transforms the raw analysis into a clean, readable report with plain-English explanations
+
+### How to Use It
+
+```
+# In Claude Code (this repo)
+/stock-report HDFC Bank
+/stock-report Reliance Industries
+/stock-report Zomato
+```
+
+**Output files** (saved to `stock-reports/<stock-slug>/<date>/`):
+| File | Contents |
+|------|----------|
+| `<stock>-<date>.md` | Final clean report (the one you read) |
+| `<stock>-<date>.raw.md` | Full raw analysis (for deep-dive reference) |
+| `<stock>-<date>.sources.md` | All sources used, with approval status |
+
+### Pros
+
+- **Source transparency**: You see and approve every web source before analysis begins — no hidden or dubious sources influencing the output
+- **Three-agent architecture**: Each agent is specialized (data gathering, analysis, writing) — separation of concerns produces higher quality than a single monolithic prompt
+- **Plain-English output**: The final report explains financial jargon inline — a "What It Means" column in ratio tables, plain-English glossary for banking/sector metrics
+- **Idempotent and resumable**: Each agent saves its output file before the next starts. If Agent 2 fails, Agent 1's sources file is already saved — you don't lose work
+- **Persistent reports**: Reports are saved to `stock-reports/` with date-stamped directories, building a library of analyses over time
+
+### Cons and Limitations
+
+- **Requires Claude Code**: This is a slash command — it only works inside Claude Code with this repo as the working directory. Cannot be used in Claude.ai web or API directly.
+- **Sequential pipeline takes time**: Three agents run one after another. For a thorough report, expect the full pipeline to take several minutes.
+- **Source approval is manual**: You must be present to approve sources between Agent 1 and Agent 2. This is by design (transparency), but it means you can't fire-and-forget.
+- **Report quality depends on available sources**: If web searches return sparse results (niche small-cap, recent IPO), the report will have gaps.
+- **No real-time data without MCP**: Falls back to yfinance if Groww/Zerodha MCP is not connected — data may lag by 1 day.
+
+### How to Extract Maximum Benefit
+
+1. **Run after market close on analysis days**: The data is freshest and you have time to review sources thoughtfully.
+2. **Approve sources selectively**: Don't just say "all" — skim the source list and reject low-quality or outdated sources. The analysis quality is directly proportional to source quality.
+3. **Ask for more sources when gaps exist**: If the Source Scout didn't find concall transcripts or peer comparisons, ask for a targeted search before proceeding.
+4. **Use the raw analysis for deep dives**: The final report is simplified; the `.raw.md` file has the full detail including all ratio calculations, complete peer tables, and detailed risk matrices.
+5. **Build a library**: Run `/stock-report` on your watchlist stocks periodically. The dated directory structure lets you track how the analysis evolves quarter over quarter.
+
+### What to Completely Avoid
+
+- **Don't skip the source approval step** — approving "all" without reviewing defeats the purpose of the interactive pipeline.
+- **Don't treat the report as a buy/sell recommendation** — it's research input, not financial advice.
+- **Don't run on stocks you can't verify**: If you're unfamiliar with a company, you won't be able to judge whether the sources are relevant or the analysis is reasonable.
+- **Don't compare reports generated months apart without re-running** — market conditions, financials, and shareholding patterns change. Always use the latest report for decisions.
+
+---
+
+## India Stock Analysis — Interactive
+
+**File**: `skills/india-stock-analysis-interactive/SKILL.md`
+**Category**: Interactive Fundamental + Technical Research | **Input**: Stock ticker (NSE/BSE)
+**Best for**: Source-vetted deep research, powering the /stock-report pipeline, due diligence with full transparency
+
+### What It Does
+
+An interactive version of the India Stock Analysis skill that adds a source approval step before deep analysis. Instead of directly analyzing, it first gathers all data and web sources, presents them to you for approval, then performs comprehensive analysis using only the sources you approved. This is the skill that powers the `/stock-report` slash command — the Source Scout agent runs Phases 1–2, and the Stock Analyst agent runs Phase 3.
+
+### How to Use It
+
+```
+# Via /stock-report (recommended — handles the full pipeline)
+/stock-report TITAN
+
+# Directly loading the skill
+"Load the interactive stock analysis skill and analyze BAJAJ FINANCE"
+"Analyze ICICI Bank — show me the sources first before proceeding"
+```
+
+**Phase flow**:
+1. **Discovery** (automated) → Resolves symbol, fetches market data via MCP/yfinance, runs 5–8 targeted web searches
+2. **Source Approval** (interactive) → Presents all web sources with URLs and search context; you approve/reject
+3. **Deep Analysis** (automated) → Full fundamental + technical analysis using only approved sources
+
+### Pros
+
+- **Source vetting eliminates garbage-in-garbage-out**: You control exactly which analyst reports, news articles, and data pages feed into the analysis
+- **MCP-first, yfinance-fallback**: Uses Groww or Zerodha MCP for live data when connected; degrades gracefully to yfinance
+- **MoneyControl integration**: Always includes at least one `site:moneycontrol.com` search — a trusted primary source for Indian stock financials
+- **Sector-specific metrics**: Automatically applies banking metrics (NIM, GNPA, CASA) for banks, IT metrics (attrition, deal TCV) for IT stocks, etc.
+- **Saves intermediate files**: Sources file (`.sources.md`) and raw analysis (`.raw.md`) are persisted — reusable across sessions
+
+### Cons and Limitations
+
+- **Requires user interaction mid-flow**: The source approval step means you can't fully automate the pipeline. This is intentional but adds friction.
+- **Web search quality varies**: Some searches return paywalled or low-relevance results. Rejecting these is important but requires your judgment.
+- **Same data limitations as India Stock Analysis**: yfinance gaps for small-caps, no access to Bloomberg/Refinitiv, forward estimates are inferred not sourced.
+- **Longer than non-interactive analysis**: The approval step adds time compared to the original India Stock Analysis skill.
+
+### How to Extract Maximum Benefit
+
+1. **Request additional searches for gaps**: After the initial source list, ask for concall transcripts, peer comparisons, or sector reports if they're missing.
+2. **Reject aggressively**: A report built on 5 high-quality sources beats one built on 12 sources where half are clickbait.
+3. **Use via `/stock-report` for the full experience**: The slash command adds the Report Writer agent, which simplifies jargon and produces a cleaner final output.
+4. **Compare the sources file across runs**: If you re-analyze a stock quarterly, the sources file shows you what information was available each time.
+
+### What to Completely Avoid
+
+- **Don't approve sources you haven't at least skimmed the title/URL of** — a source from an unreliable domain can skew the entire analysis.
+- **Don't use this skill for quick lookups** — the original India Stock Analysis skill is faster for simple queries. Use this when you want full transparency and are willing to invest the time.
+- **Don't skip the "search for more?" prompt without thinking** — if key areas (management commentary, regulatory risks) aren't covered, say so.
+
+---
+
+## Stock Report Writer
+
+**File**: `skills/stock-report-writer/SKILL.md`
+**Category**: Report Formatting + Simplification | **Input**: Raw analysis file (`.raw.md`) + Sources file (`.sources.md`)
+**Best for**: Transforming dense stock analysis into a readable, jargon-explained report
+
+### What It Does
+
+A formatting and simplification skill that takes a raw stock analysis (from the Stock Analyst agent) and produces a clean, readable markdown report. It does **not** fetch data or form new opinions — it restructures, simplifies financial jargon using a built-in glossary, and writes. Used as the final agent in the `/stock-report` pipeline.
+
+### How to Use It
+
+```
+# Typically used automatically via /stock-report
+# But can be invoked directly if you have a raw analysis file:
+"Use the stock report writer skill to format stock-reports/hdfc-bank/2026-03-29/hdfc-bank-2026-03-29.raw.md into a clean report"
+```
+
+**Input → Output**:
+| Input | Output |
+|-------|--------|
+| `.raw.md` (dense, all data) | `.md` (clean, simplified, glossary-annotated) |
+| `.sources.md` (source list) | Sources section at end of report |
+
+### Pros
+
+- **Plain-English glossary**: Ratio tables include a "What It Means" column — PE Ratio becomes "Years of current earnings the price reflects", NIM becomes "Spread between loan earnings and deposit costs"
+- **Adaptive to stock type**: Banking reports get banking metric explanations; pharma reports get pharma-specific context. The writer adapts to whatever sections the raw analysis contains.
+- **Skips empty sections cleanly**: If the raw analysis doesn't have a section (e.g., no peer comparison data), the report omits it entirely rather than showing empty placeholders.
+- **Updates the stock-reports index**: Automatically adds the new report to `stock-reports/README.md` so your report library stays organized.
+- **Neutral, direct tone**: No filler phrases, no hype — just the analysis presented clearly with key numbers bolded.
+
+### Cons and Limitations
+
+- **Only as good as its input**: The writer cannot improve a sparse or poorly-structured raw analysis — it formats what it receives.
+- **No new analysis or opinions**: It explicitly does not fetch data, cross-check numbers, or add insights beyond what's in the raw file. Errors in the raw analysis pass through.
+- **Glossary coverage is finite**: Niche or newly-invented financial metrics may not have glossary entries. The writer will present them without explanation.
+- **Template-bound structure**: The output follows a fixed template (`assets/simplified-report-template.md`). If you want a different report structure, the template needs editing.
+
+### How to Extract Maximum Benefit
+
+1. **Let it run via `/stock-report`**: The full pipeline (Source Scout → Stock Analyst → Report Writer) produces the best results since each agent is optimized for its role.
+2. **Read the final `.md` report for decisions, the `.raw.md` for deep dives**: The writer intentionally simplifies — if you need the full ratio breakdown or complete risk matrix, go to the raw file.
+3. **Use the "What It Means" column to educate yourself**: Over time, you'll internalize what metrics like CASA Ratio, Provision Coverage, or EV/EBITDA mean without needing the glossary.
+
+### What to Completely Avoid
+
+- **Don't feed it non-analysis files** — it expects a specific raw analysis structure. Feeding it arbitrary markdown will produce a malformed report.
+- **Don't edit the final report and expect it to persist across re-runs** — re-running `/stock-report` overwrites the report. Save personal notes separately.
+- **Don't skip reading the Disclaimer section** — every report includes one. It's there for a reason.
 
 ---
 
@@ -845,5 +1021,5 @@ python3 skills/india-news-tracker/scripts/news_fetcher.py --stock RELIANCE
 
 ---
 
-*Generated: March 2026 | Covers all 10 skills as of commit `5bb7658`*
+*Generated: March 2026 | Covers 12 skills + 1 slash command*
 *This is a living document — update after major skill revisions.*

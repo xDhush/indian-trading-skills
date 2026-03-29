@@ -10,5 +10,4 @@ logs/
 dist/
 build/
 _upstream/
-.claude/
 .DS_Store
