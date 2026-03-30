@@ -34,6 +34,7 @@ Save the `.sources.md` file to the path provided by the caller. Return all gathe
 
 ## Do's
 
+- **Do** run the 2 mandatory MoneyControl searches (step 3 in the skill) as separate, dedicated searches before general searches — these must not be skipped or combined with other queries
 - **Do** run web searches with the current year to get the latest results (e.g., "HDFC Bank Q3 FY26 results 2026")
 - **Do** include the search query context ("Why") for every source — it helps the user judge relevance
 - **Do** fetch data in parallel wherever possible to save time

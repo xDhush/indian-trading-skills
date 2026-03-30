@@ -65,21 +65,27 @@ This phase gathers all raw data and finds web sources. No user interaction neede
 
    d. **Shareholding pattern:** Call `fetch_stocks_fundamental_data` with `view='shareholders_and_mutual_funds'` or fetch from Trendlyne/BSE.
 
-3. **Run web searches.** Execute 5–8 targeted searches to find editorial and opinion sources:
+3. **Run MoneyControl searches (mandatory).** These MUST be run as separate, dedicated searches — do not combine with other queries:
+
+   a. `[Company Name] moneycontrol latest news [current year]` — recent news articles, corporate updates, and market commentary on MoneyControl
+   b. `[Company Name] moneycontrol quarterly results analysis [current year]` — earnings analysis, financial performance coverage
+
+   MoneyControl is a primary trusted source for Indian stock coverage. If either search returns MoneyControl URLs, include them all in the source list. If a search returns zero MoneyControl results, note this when presenting sources ("MoneyControl: no results found for [query]").
+
+4. **Run general web searches.** Execute 4–6 additional targeted searches for editorial and opinion sources:
    - Latest quarterly results and financial performance
    - Analyst price targets and recommendations
    - Recent company news (last 30 days)
    - Shareholding pattern and institutional activity
    - Sector outlook and macro developments
    - Management commentary / concall highlights (if available)
-   - **MoneyControl financials and analysis** — include at least one search with `site:moneycontrol.com` (e.g., `"site:moneycontrol.com [Company Name] financials"` or `"site:moneycontrol.com [Company Name] quarterly results [current year]"`). MoneyControl is a trusted source for Indian stock fundamentals, financial statements, peer comparisons, and analyst consensus.
 
-4. **Compile all source URLs** found from the web searches. Record each source with:
+5. **Compile all source URLs** found from the web searches (steps 3 and 4). Record each source with:
    - Title
    - URL
    - Which search query found it (one line)
 
-5. **Compile data sources** used (yfinance, MCP tools, Trendlyne, etc.).
+6. **Compile data sources** used (yfinance, MCP tools, Trendlyne, etc.).
 
 ---
 
