@@ -24,4 +24,7 @@ The `/stock-report <stock name>` command runs three agents in sequence:
 
 | Stock | Date | Report | Raw | Sources |
 |-------|------|--------|-----|---------|
+| Rolex Rings Ltd | 2026-03-31 | [Report](rolex-rings-ltd/2026-03-31/rolex-rings-ltd-2026-03-31.md) | [Raw](rolex-rings-ltd/2026-03-31/rolex-rings-ltd-2026-03-31.raw.md) | [Sources](rolex-rings-ltd/2026-03-31/rolex-rings-ltd-2026-03-31.sources.md) |
+| Adani Total Gas Ltd | 2026-03-30 | [Report](adani-total-gas-ltd/2026-03-30/adani-total-gas-ltd-2026-03-30.md) | [Raw](adani-total-gas-ltd/2026-03-30/adani-total-gas-ltd-2026-03-30.raw.md) | [Sources](adani-total-gas-ltd/2026-03-30/adani-total-gas-ltd-2026-03-30.sources.md) |
+| Kirloskar Pneumatic Company Ltd | 2026-03-30 | [Report](kirloskar-pneumatic-company-ltd/2026-03-30/kirloskar-pneumatic-company-ltd-2026-03-30.md) | [Raw](kirloskar-pneumatic-company-ltd/2026-03-30/kirloskar-pneumatic-company-ltd-2026-03-30.raw.md) | [Sources](kirloskar-pneumatic-company-ltd/2026-03-30/kirloskar-pneumatic-company-ltd-2026-03-30.sources.md) |
 | TeamLease Services Ltd | 2026-03-29 | [Report](teamlease-services-ltd/2026-03-29/teamlease-services-ltd-2026-03-29.md) | [Raw](teamlease-services-ltd/2026-03-29/teamlease-services-ltd-2026-03-29.raw.md) | [Sources](teamlease-services-ltd/2026-03-29/teamlease-services-ltd-2026-03-29.sources.md) |
