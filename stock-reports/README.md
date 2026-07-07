@@ -24,6 +24,9 @@ The `/stock-report <stock name>` command runs three agents in sequence:
 
 | Stock | Date | Report | Raw | Sources |
 |-------|------|--------|-----|---------|
+| Shree Cement Ltd | 2026-05-01 | [Report](shree-cement-ltd/2026-05-01/shree-cement-ltd-2026-05-01.md) | [Raw](shree-cement-ltd/2026-05-01/shree-cement-ltd-2026-05-01.raw.md) | [Sources](shree-cement-ltd/2026-05-01/shree-cement-ltd-2026-05-01.sources.md) |
+| ITC Ltd | 2026-05-01 | [Report](itc-ltd/2026-05-01/itc-ltd-2026-05-01.md) | [Raw](itc-ltd/2026-05-01/itc-ltd-2026-05-01.raw.md) | [Sources](itc-ltd/2026-05-01/itc-ltd-2026-05-01.sources.md) |
+| HDFC Bank Limited | 2026-04-26 | [Report](hdfc-bank/2026-04-26/hdfc-bank-2026-04-26.md) | [Raw](hdfc-bank/2026-04-26/hdfc-bank-2026-04-26.raw.md) | [Sources](hdfc-bank/2026-04-26/hdfc-bank-2026-04-26.sources.md) |
 | Rolex Rings Ltd | 2026-03-31 | [Report](rolex-rings-ltd/2026-03-31/rolex-rings-ltd-2026-03-31.md) | [Raw](rolex-rings-ltd/2026-03-31/rolex-rings-ltd-2026-03-31.raw.md) | [Sources](rolex-rings-ltd/2026-03-31/rolex-rings-ltd-2026-03-31.sources.md) |
 | Adani Total Gas Ltd | 2026-03-30 | [Report](adani-total-gas-ltd/2026-03-30/adani-total-gas-ltd-2026-03-30.md) | [Raw](adani-total-gas-ltd/2026-03-30/adani-total-gas-ltd-2026-03-30.raw.md) | [Sources](adani-total-gas-ltd/2026-03-30/adani-total-gas-ltd-2026-03-30.sources.md) |
 | Kirloskar Pneumatic Company Ltd | 2026-03-30 | [Report](kirloskar-pneumatic-company-ltd/2026-03-30/kirloskar-pneumatic-company-ltd-2026-03-30.md) | [Raw](kirloskar-pneumatic-company-ltd/2026-03-30/kirloskar-pneumatic-company-ltd-2026-03-30.raw.md) | [Sources](kirloskar-pneumatic-company-ltd/2026-03-30/kirloskar-pneumatic-company-ltd-2026-03-30.sources.md) |
